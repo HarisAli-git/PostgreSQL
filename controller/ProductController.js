@@ -16,8 +16,8 @@ exports.products_get_all = async (req, res) => {
     let {category, page, size} = req.query;
   
     if (!page) {
-    page = 1;
-  }
+      page = 1;
+    }
     
     if (!size) {
       size = 2;

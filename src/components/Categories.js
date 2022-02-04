@@ -3,9 +3,9 @@ import { Fetch_cat_Mongo } from "../middleware/RESTapi_caller";
 import { Link } from "react-router-dom";
 
 const Display = (cat) => {
-    let a2 = Object.values(cat).map((cats) => (
-        <div class="container-fluid" className="open-cont">
-            <div class="container" className="course-cont">
+    let a2 = Object.values(cat).map((cats, index) => (
+        <div key={index} className="container-fluid open-cont">
+            <div className="container course-cont">
             
             <div className="cpc">
                 <p className="cp">{cats.name}</p>
@@ -20,11 +20,11 @@ return <ul>{a2}</ul>;
 
 const Categories = () => {
 
-    const [category, setCategory] = useState(' ');
+    const [category, setCategory] = useState('');
     const [isPending, setIsPending] = useState(false);
-    const [img_src, setImgSrc] = useState(' ');
-    const [cat, setCat] = useState(' ');
-    const [index, setIndex] = useState(' ');
+    const [img_src, setImgSrc] = useState('');
+    const [cat, setCat] = useState('');
+    const [index, setIndex] = useState('');
 
     const FetchCategories = (e) => {
         Fetch_cat_Mongo().then((response) => {

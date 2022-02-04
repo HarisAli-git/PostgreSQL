@@ -5,29 +5,29 @@ function FetchProdPaginateMongo(value, page, size) {
     if (value !== -1)
     {
         const param = "category=" + value + "&page=" + page + "&size=" + size;
-        return axios({ method: "GET", url: "http://localhost:3000/products?" + param}); 
+        return axios({ method: "GET", url: "http://localhost:5000/products?" + param}); 
     }
     else{
         const param = "page=" + page + "&size=" + size;
-        return axios({ method: "GET", url: "http://localhost:3000/products?" + param});
+        return axios({ method: "GET", url: "http://localhost:5000/products?" + param});
     }
 }
 
 
 function Fetch_prod_Mongo() {
-    return axios({ method: "GET", url: "http://localhost:3000/products"});
+    return axios({ method: "GET", url: "http://localhost:5000/products"});
 }
 
 function Fetch_cat_Mongo(param) {
-    return axios({ method: "GET", url: "http://localhost:3000/categories/" });
+    return axios({ method: "GET", url: "http://localhost:5000/categories/" });
 }
 
 function Fetch_Product_Mongo(id) {
-    return axios({ method: "GET", url: "http://localhost:3000/products/" + id });
+    return axios({ method: "GET", url: "http://localhost:5000/products/" + id });
 }
 
 function Delete_Product_Mongo(id) {
-    return axios({ method: "DELETE", url: "http://localhost:3000/products/" + id });
+    return axios({ method: "DELETE", url: "http://localhost:5000/products/" + id });
 }
 
 function Post_SignUpCatMongo(param)
@@ -35,7 +35,7 @@ function Post_SignUpCatMongo(param)
     const category = { name: param.name};
 
     return axios({
-        method: "POST", url: "http://localhost:3000/categories/addCategory/",
+        method: "POST", url: "http://localhost:5000/categories/addCategory/",
         data: category
     });
 }
@@ -45,7 +45,7 @@ function Post_SignUpMongo(param) {
     const product = { category: param.category, name: param.name, price: param.price, img_src: param.img_src};
 
     return axios({
-        method: "POST", url: "http://localhost:3000/products/addProduct/",
+        method: "POST", url: "http://localhost:5000/products/addProduct/",
         data: product
     });
 }

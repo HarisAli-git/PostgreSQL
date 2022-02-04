@@ -15,7 +15,7 @@ const ViewProduct = () => {
     const FetchProduct = async (e) => {
         const res = await Fetch_Product_Mongo(id);
         console.log("Here is the response: ", res);
-        setProd(res.data);
+        setProd(res.data.data);
     }
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const ViewProduct = () => {
             <h1>Product Details:- </h1>
             { prod && 
             (<Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={prod.img_src} style={{ 'max-width': '300px', 'max-height': '380px' }}/>
+                <Card.Img variant="top" src={prod.img_src} style={{ maxWidth: '300px', maxHeight: '380px' }}/>
                 <Card.Body>
                 <Card.Title>{prod.name}</Card.Title>
                 <p>{prod.price}</p>

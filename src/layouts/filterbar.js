@@ -35,8 +35,8 @@ const FilterBar = () =>
 
         <Dropdown.Menu>
         <Dropdown.Item onClick={() => {setcurrentCat(false)}}>Any Category</Dropdown.Item>
-        {Object.values(categories).map((cats) => (
-          <Dropdown.Item onClick = {(e) => setcurrentCat(cats.name)}>{cats.name}</Dropdown.Item>))}
+        {Object.values(categories).map((cats, index) => (
+          <Dropdown.Item key={index} onClick = {(e) => setcurrentCat(cats.name)}>{cats.name}</Dropdown.Item>))}
         </Dropdown.Menu>
       </Dropdown>
       <br />

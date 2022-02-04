@@ -97,8 +97,8 @@ const NewProduct = () => {
                   onChange = {(e) => setValue('category', e.target.value)}
                 >
                   <option key={'empty'} value=''>Please Select a category</option>
-                  {categories.map((cat) => (
-                    <option key={cat._id} value={cat.name}>{cat.name}</option>
+                  {categories.map((cat, index) => (
+                    <option key={index} value={cat.name}>{cat.name}</option>
                   ))}
                 </select>
                 {alert}

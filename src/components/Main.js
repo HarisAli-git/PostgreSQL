@@ -17,62 +17,48 @@ const Main = ({value}) => {
       setLimit(5);
     }, [value])
 
-    const FetchProjects  = async() => {
-        const response = await FetchProdPaginateMongo(1, 2);
-        !value && setProd(response.data.data); 
-        value && setProd((response.data.data).filter(p => p.category === value));
-    }
+    // const FetchProjects  = async() => {
+    //     const response = await FetchProdPaginateMongo(1, 2);
+    //     !value && setProd(response.data.data); 
+    //     value && setProd((response.data.data).filter(p => p.category === value));
+    // }
 
     const callAxios = async (p1) => {
-      if (p1 > limit)
-      {
+      if (p1 > limit) {
         p1 = limit;
-      }
-      if (p1 < 1)
-      {
+      } else if (p1 < 1) {
         p1 = 1;
       }
+
       setPage(p1);
       setAlert(' ')
-      if (value)
+      console.log(value);
+      const result = await FetchProdPaginateMongo(value || -1, p1, 5);
+      if(result.data.data.length === 0)
       {
-        console.log(value);
-        const result = await FetchProdPaginateMongo(value, p1, 2);
-        if(result.data.data.length === 0)
-        {
-          setLimit(p1);
-          setAlert(<Alert variant="warning">
-          No More products to Show!
-      </Alert>);
-        }
-        setProd(result.data.data);
+        setLimit(p1);
+        setAlert(
+          <Alert variant="warning">
+            No More products to Show!
+          </Alert>
+        );
       }
-      else{
-        const result = await FetchProdPaginateMongo(-1, p1, 2);
-        if(result.data.data.length === 0)
-        {
-          setLimit(p1);
-          setAlert(<Alert variant="warning">
-          No More products to Show!
-      </Alert>);
-        }
-        setProd(result.data.data);
-      } 
+      setProd(result.data.data);
     }  
 
     return (<div>
       {!Products &&
         <Alert variant="secondary"> Loading!!! </Alert>}
-        <div class="container" className="b-co">
+        <div className="container b-co">
         {alert}
         <div>{<Display products={Products}></Display>}</div>
-        <Button variant="light" onClick={() => callAxios(page - 1)}>
+        <Button variant="outline-info" onClick={() => callAxios(page - 1)}>
           {'<<'} Back
         </Button>
-        <Button variant="secondary">
+        <Button variant="success" disabled>
           {page}
         </Button>
-        <Button variant="light" onClick={() => callAxios(page + 1)}>
+        <Button variant="outline-info" onClick={() => callAxios(page + 1)}>
           Next {'>>'}
         </Button>
         </div>
@@ -80,17 +66,18 @@ const Main = ({value}) => {
 }
 
 const Display = ({products}) => {
-    let a2 = Object.values(products).map((myprod) => (
-    <div>
+    let a2 = Object.values(products).map((myprod, index) => (
+    <div key={index}>
       <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={myprod.img_src} style={{ 'max-width': '200px', 'max-height': '280px' }}/>
+        <Card.Img variant="top" src={myprod.img_src} style={{ maxWidth: '200px', maxHeight: '280px' }}/>
         <Card.Body>
           <Card.Title>{myprod.name}</Card.Title>
           <p>{myprod.price}</p>
           <Card.Text>
             The Product Falls in the {myprod.category} category.
           </Card.Text>
-          <Link to={`/${myprod._id}`}>
+          {JSON.stringify(myprod.id)}
+          <Link to={`/${myprod.id}`}>
           <Button variant="primary">View Details!</Button>
           </Link>
         </Card.Body>

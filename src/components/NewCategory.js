@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 const NewCategory = () => {
 
-    const [name, setName] = useState(' ');
+    const [name, setName] = useState('');
     const [isPending, setIsPending] = useState(false);
     const [alert, setAlert] = useState(' ');
     const [flag, setFlag] = useState(false);
